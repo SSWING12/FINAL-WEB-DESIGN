@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ar Swing</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 10%;
+    width: 100%;
+    padding: 1.3rem 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(50px);
+    z-index: -1;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .4), transparent);
+    transition: .5s;
+}
+
+header:hover::after {
+    left: 100%;
+}
+
+#check {
+    display: none;
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: black;
+    user-select: none;
+    animation: fadeUp 2s ease ;
+}
+
+.icons {
+    position: absolute;
+    right: 5%;
+    font-size: 2.8rem;
+    color: #000;
+    cursor: pointer;
+    display: none;
+}
+
+.navigation a {
+    position: relative;
+    font-size: 1.15em;
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 2.5rem;
+    font-weight: bold;
+}
+
+.navigation a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: black;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: transform .3s;
+}
+
+.navigation a:hover::after{
+    transform: scaleX(1);
+}
+
+.btnLogin-popup {
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid black;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: black;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+}
+
+.btnLogin-popup:hover {
+    background: #fff;
+    color: #162938;
+}   
+
+.about{
+    width: 100%;
+    height: 100vh;
+    padding: 70px 0;
+}
+
+.about .about_main{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.about .about_main .image img{
+    width: 500px;
+    position: relative;
+    top: 60px;
+    padding: 20px;
+    padding-top: 130px;
+}
+
+.about .about_main .about_text h1 span{
+    color: #fac031;
+    margin-right: 15px;
+    font-family: mv boli;
+}
+
+.about .about_main .about_text h1{
+    font-size: 55px;
+    position: relative;
+    bottom: 50px;
+}
+
+.about .about_main .about_text h3{
+    font-size: 30px;
+    margin: 0 0 50px 0;
+}
+
+.about .about_main .about_text p{
+    width: 650px;
+    text-align: justify;
+    margin-right: 30px;
+    line-height: 22px;
+}
+
+@media (max-width: 768px) {
+    .about .about_main {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about .about_main .image img {
+        width: 80%;
+        padding-top: 50px;
+    }
+
+    .about .about_main .about_text h1 {
+        font-size: 40px;
+        bottom: 0;
+    }
+
+    .about .about_main .about_text p {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+</style>
+<body>
+    <header>
+        <h2 class="logo">Laundry</h2>
+
+        <input type="checkbox"  id="check">
+        <label for="check" class="icons">
+            <i class='bx bx-menu' id="menu-icon"></i>
+            <i class='bx bx-x' id="close-icon"></i>
+        </label>
+
+        <nav class="navigation">
+            <a href="index.html" style="--i:0">Home</a>
+            <a href="About.html" style="--i:1">About</a>
+            <a href="price.html" style="--i:2">Price</a>
+            <a href="team.html" style="--i:2">Newest</a>
+            <a href="loc.html" style="--i:3">Loc</a>
+            <button class="btnLogin-popup" onclick="window.location.href='pesan.html'">PESAN</button>
+        </nav>
+    </header>
+
+    <div class="about" id="About">
+        <div class="about_main">
+            <div class="image">
+                <img src="image/about.png">
+            </div>
+            <div class="about_text">
+                <h1><span>About</span>Us</h1>
+                <h3>Why Choose us?</h3>
+                <p>
+                    We welcome you to choose Clean & Fresh Laundry for all your laundry needs, where excellence is our constant pursuit in every facet of our service. From impeccable cleanliness to personalized customer care, we ensure that every interaction with Clean & Fresh Laundry not only meets but exceeds your expectations, leaving you with a sense of satisfaction and confidence. Thank you for choosing us, and we are dedicated to consistently surpassing your laundry expectations.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

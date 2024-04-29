@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ar Swing</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url(/image2/bg1.jpg);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 10%;
+    width: 100%;
+    padding: 1.3rem 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(50px);
+    z-index: -1;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .4), transparent);
+    transition: .5s;
+}
+
+header:hover::after {
+    left: 100%;
+}
+
+#check {
+    display: none;
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: black;
+    user-select: none;
+    animation: fadeUp 2s ease ;
+}
+
+.icons {
+    position: absolute;
+    right: 5%;
+    font-size: 2.8rem;
+    color: #000;
+    cursor: pointer;
+    display: none;
+}
+
+.navigation a {
+    position: relative;
+    font-size: 1.15em;
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 2.5rem;
+    font-weight: bold;
+}
+
+.navigation a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: black;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: transform .3s;
+}
+
+.navigation a:hover::after{
+    transform: scaleX(1);
+}
+
+.btnLogin-popup {
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid black;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: black;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+}
+
+.btnLogin-popup:hover {
+    background: #fff;
+    color: #162938;
+}
+
+.review {
+    padding: 50px 0;
+}
+
+.review h1 {
+    padding-top: 50px;
+    font-size: 5vw; /* Responsive font size */
+    text-align: center; /* Center the text */
+    margin-bottom: 20px; /* Add some space below the heading */
+}
+
+.review h1 span::after {
+    content: '';
+    display: block;
+    width: 25%;
+    height: 2px;
+    background: #fac031;
+    margin: 10px auto; /* Center the line */
+}
+
+.review .review_box {
+    max-width: 1200px; /* Limit maximum width of review box */
+    margin: 0 auto; /* Center the review box horizontally */
+    display: flex;
+    flex-wrap: wrap; /* Allow flex items to wrap */
+    justify-content: center; /* Center align items */
+}
+
+.review .review_box .review_card {
+    width: 45%; /* Adjust card width for responsiveness */
+    max-width: 350px; /* Limit maximum card width */
+    margin: 20px; /* Add margin between cards */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.review .review_box .review_card .review_profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: 0.3s;
+}
+
+.review .review_box .review_card:hover .review_profile {
+    transform: translateY(-20px); /* Adjust hover translation */
+}
+
+.review .review_box .review_card .review_profile img {
+    width: 100%; /* Make image responsive within its container */
+    max-width: 180px; /* Limit maximum width of profile image */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%;
+    border: 5px solid #cccccc;
+}
+
+.review .review_box .review_card .review_text {
+    text-align: center;
+}
+
+.review .review_box .review_card .review_text .name,
+.review .review_box .review_card .review_text .review_icon {
+    transition: 0.3s;
+}
+
+.review .review_box .review_card:hover .review_text .name {
+    transform: translateY(-10px); /* Adjust hover translation */
+}
+
+.review .review_box .review_card:hover .review_text .review_icon {
+    transform: translateY(-5px); /* Adjust hover translation */
+}
+
+.review .review_box .review_card .review_text .review_social i {
+    margin: 5px 1px;
+    font-size: 15px;
+    opacity: 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.review .review_box .review_card:hover .review_text .review_social i {
+    opacity: 1;
+    transform: translateY(-3px); /* Adjust hover translation */
+}
+
+.review .review_box .review_card .review_text p {
+    text-align: center;
+    line-height: 22px;
+    transition: 0.3s;
+}
+
+.review .review_box .review_card:hover .review_text p {
+    margin-top: 10px; /* Adjust margin on hover */
+}
+
+::-webkit-scrollbar{
+    width: 13px
+}
+
+::-webkit-scrollbar-track{
+    border-radius: 15px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+}
+
+::-webkit-scrollbar-thumb{
+    background: #fac031;
+    border-radius: 15px;
+}
+
+/* Media Query for smaller screens */
+@media screen and (max-width: 768px) {
+    .review .review_box .review_card {
+        width: 90%; /* Adjust card width for smaller screens */
+        max-width: none; /* Remove maximum width limit */
+    }
+}
+
+@media (max-width: 768px) {
+    section nav .logo img {
+        height: auto;
+        width: 120px; /* Ukuran gambar logo pada layar kecil */
+        margin-left: -190px;
+        margin-right: 10px;
+    }
+
+    .icons {
+        display: inline-flex;
+    }
+
+    #check:checked~.icons #menu-icon {
+        display: none;
+    }
+
+    .icons #close-icon {
+        display: none;
+    }
+
+    #check:checked~.icons #close-icon {
+        display: block;
+    }
+
+    .navigation {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background: transparent;
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .3);
+        backdrop-filter: blur(50px);
+        overflow: hidden;
+        transition: .3s ease;
+    }
+
+    #check:checked~.navigation {
+        height: auto; /* Changed from fixed height */
+    }
+
+    .navigation a, .navigation button {
+        display: block;
+        font-size: 1.1rem;
+        margin: 1.5rem 0;
+        text-align: center;
+        transform: translateY(-50px);
+        opacity: 0;
+        transition: .3s ease;
+    }
+
+    #check:checked~.navigation a, #check:checked~.navigation button {
+        transform: translateY(0);
+        opacity: 1;
+        transition-delay: calc(.15s * var(--i));
+    }
+}
+</style>
+
+<body>
+    <header>
+        <h2 class="logo">Laundry</h2>
+
+        <input type="checkbox"  id="check">
+        <label for="check" class="icons">
+            <i class='bx bx-menu' id="menu-icon"></i>
+            <i class='bx bx-x' id="close-icon"></i>
+        </label>
+
+        <nav class="navigation">
+            <a href="index.html" style="--i:0">Home</a>
+            <a href="About.html" style="--i:1">About</a>
+            <a href="price.html" style="--i:2">Price</a>
+            <a href="team.html" style="--i:2">Newest</a>
+            <a href="loc.html" style="--i:3">Loc</a>
+            <button class="btnLogin-popup" onclick="window.location.href='pesan.html'">PESAN</button>
+        </nav>
+    </header>
+
+        <div class="review" id="Review">
+            <h1>Our<span>Newest Service</span></h1>
+    
+            <div class="review_box">
+                <div class="review_card">
+    
+                    <div class="review_profile">
+                        <img src="image2/cucikering.jpg">
+                    </div>
+    
+                    <div class="review_text">
+                        <h2 class="name">Paket 1</h2>
+    
+                        <div class="review_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        
+                        <div class="review_social">
+                            <i class="name">Only 8.000</i>                    
+                        </div>
+    
+                        <p>
+                            Paket Cuci Kering
+                        </p>
+    
+                    </div>
+    
+                </div>
+    
+                <div class="review_card">
+    
+                    <div class="review_profile">
+                        <img src="image2/setrika.jpg">
+                    </div>
+    
+                    <div class="review_text">
+                        <h2 class="name">Paket 2</h2>
+    
+                        <div class="review_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+    
+                        <div class="review_social">
+                            <i class="name">Only 8.000</i>                    
+                        </div>
+                        
+                        <p>
+                            Paket Setrika
+                        </p>
+    
+                    </div>
+    
+                </div>
+    
+                <div class="review_card">
+    
+                    <div class="review_profile">
+                        <img src="image2/panta.png">
+                    </div>
+    
+                    <div class="review_text">
+                        <h2 class="name">Paket 3</h2>
+    
+                        <div class="review_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+    
+                        <div class="review_social">
+                            <i class="name">Only 8.000</i>
+                         
+                        </div>
+    
+                        <p>
+                            Paket Cuci Basah
+                        </p>
+    
+                    </div>
+    
+                </div>
+    
+                <div class="review_card">
+    
+                    <div class="review_profile">
+                        <img src="image2/komplit.jpg">
+                    </div>
+    
+                    <div class="review_text">
+                        <h2 class="name">Paket 4</h2>
+    
+                        <div class="review_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+    
+                        <div class="review_social">
+                            <i class="name">Only Rp 8.000</i>
+                        </div>
+    
+                        <p>
+                            Paket Komplit
+                        </p>
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+        </div>
+</body>
+</html>

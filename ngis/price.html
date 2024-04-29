@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ar Swing</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 10%;
+    width: 100%;
+    padding: 1.3rem 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(50px);
+    z-index: -1;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .4), transparent);
+    transition: .5s;
+}
+
+header:hover::after {
+    left: 100%;
+}
+
+#check {
+    display: none;
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: black;
+    user-select: none;
+    animation: fadeUp 2s ease ;
+}
+
+.icons {
+    position: absolute;
+    right: 5%;
+    font-size: 2.8rem;
+    color: #000;
+    cursor: pointer;
+    display: none;
+}
+
+.navigation a {
+    position: relative;
+    font-size: 1.15em;
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 2.5rem;
+    font-weight: bold;
+}
+
+.navigation a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: black;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: transform .3s;
+}
+
+.navigation a:hover::after{
+    transform: scaleX(1);
+}
+
+.btnLogin-popup {
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid black;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: black;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+}
+
+.btnLogin-popup:hover {
+    background: #fff;
+    color: #162938;
+}
+
+.menu{
+    width: 100%;
+    padding: 70px 0;
+}
+
+.menu h1{
+    font-size: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.menu h1 span{
+    color: #fac031;
+    margin-left: 15px;
+    font-family: mv boli;
+}
+
+.menu h1 span::after{
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #fac031;
+    display: block;
+    position: relative;
+    bottom: 15px;
+}
+
+.menu .menu_box{
+    width: 95%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 15px;
+}
+
+.menu .menu_box .menu_card{
+    width: 325px;
+    height: 480px;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.menu .menu_box .menu_card .menu_image{
+    width: 300px;
+    height: 245px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.menu .menu_box .menu_card .menu_image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: 0.3s;
+}
+
+.menu .menu_box .menu_card .menu_image:hover img{
+    transform: scale(1.1);
+}
+
+.menu .menu_box .menu_card .menu_info h2{
+    width: 60%;
+    text-align: center;
+    margin: 10px auto 10px auto;
+    font-size: 25px;
+    color: #fac031;
+}
+
+.menu .menu_box .menu_card .menu_info p{
+    text-align: center;
+    margin-top: 8px;
+    line-height: 21px;
+}
+
+.menu .menu_box .menu_card .menu_info h3{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.menu .menu_box .menu_card .menu_info .menu_icon{
+    color: #fac031;
+    text-align: center;
+    margin: 10px 0 10px 0;
+}
+
+.menu .menu_box .menu_card .menu_info .menu_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    background: #000;
+    padding: 8px 10px;
+    margin: 0 80px;
+    transition: 0.3s;
+}
+</style>
+<body>
+    <header>
+        <h2 class="logo">Laundry</h2>
+
+        <input type="checkbox"  id="check">
+        <label for="check" class="icons">
+            <i class='bx bx-menu' id="menu-icon"></i>
+            <i class='bx bx-x' id="close-icon"></i>
+        </label>
+
+        <nav class="navigation">
+            <a href="index.html" style="--i:0">Home</a>
+            <a href="About.html" style="--i:1">About</a>
+            <a href="price.html" style="--i:2">Price</a>
+            <a href="team.html" style="--i:2">Newest</a>
+            <a href="loc.html" style="--i:3">Loc</a>
+            <button class="btnLogin-popup" onclick="window.location.href='pesan.html'">PESAN</button>
+        </nav>
+    </header>
+
+    <div class="menu" id="Menu">
+        <h1>Our<span>Services</span></h1>
+        <div class="menu_box">
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image2/blouses.jpg">
+                </div>
+                <div class="menu_info">
+                    <h2>Blouse</h2>
+                    <p>
+                        Pelihara Kualitas Blouse Anda
+                    </p>
+                    <h3>RP 10.000/kg</h3>
+                    <div class="menu_icon">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+            </div> 
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image2/clothes.jpg">
+                </div>
+                <div class="menu_info">
+                    <h2>Clothes</h2>
+                    <p>
+                        Baju Bersih, Penampilan Terjaga
+                    </p>
+                    <h3>RP 15.000/kg</h3>
+                    <div class="menu_icon">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                </div>
+            </div> 
+            <div class="menu_card">
+                <div class="menu_image"> 
+                    <img src="image2/dress.jpg">
+                </div>
+                <div class="menu_info">
+                    <h2>Dress</h2>
+                    <p>
+                        Jaga Dress Tetap Rapi dan Tahan Lama
+                    </p>
+                    <h3>Rp 15.000/kg</h3>
+                    <div class="menu_icon">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+            </div> 
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image2/socks.jpg">
+                </div>
+                <div class="menu_info">
+                    <h2>Socks</h2>
+                    <p>
+                        Kaos Kaki Bersih, Kenyamanan Terjamin
+                    </p>
+                    <h3>Rp 12.000/kg</h3>
+                    <div class="menu_icon">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>         
+                </div>
+            </div> 
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image2/underwear.jpg">
+                </div>
+                <div class="menu_info">
+                    <h2>Underwear</h2>
+                    <p>
+                       Celana Dalam berish, Hidup Menjadi Tenang
+                    </p>
+                    <h3>Rp 8.000/kg</h3>
+                    <div class="menu_icon">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+            </div> 
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image2/jacket.jpg">
+                </div>
+                <div class="menu_info">
+                    <h2>Coats</h2>
+                    <p>
+                        Jaket Bersih, Penampilan Terjaga
+                    </p>
+                    <h3>Rp 15.000/kg</h3>
+                    <div class="menu_icon">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>             
+                </div>
+            </div> 
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image2/baby.jpg">
+                </div>
+                <div class="menu_info">
+                    <h2>Baby Clothes</h2>
+                    <p>
+                      Baju Bersih, Membuat Bayi Lebih Nyaman
+                    </p>
+                    <h3>Rp 15.000/kg</h3>
+                    <div class="menu_icon">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>      
+                </div>
+            </div> 
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image2/jeans.jpg">
+                </div>
+                <div class="menu_info">
+                    <h2>Jeans</h2>
+                    <p>
+                        Kebersihan Celana, Kesan Yang Tak Terlupakan
+                    </p>
+                    <h3>Rp 17.000/kg</h3>
+                    <div class="menu_icon">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>     
+                </div>
+            </div> 
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image2/pants.jpg">
+                </div>
+                <div class="menu_info">
+                    <h2>Pants</h2>
+                    <p>
+                       Pentingnya Menjaga Celana Anda Tetap Bersih
+                    </p>
+                    <h3>Rp 12.000/kg</h3>
+                    <div class="menu_icon">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div> 
+                </div>
+            </div> 
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image2/clothes.jpg">
+                </div>
+                <div class="menu_info">
+                    <h2>Clothes</h2>
+                    <p>
+                        Roti Lembut dengan potongan dan selai buah blueberry
+                    </p>
+                    <h3>Rp 14.000/kg</h3>
+                    <div class="menu_icon">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>      
+                </div>
+            </div> 
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image2/jacket.jpg">
+                </div>
+                <div class="menu_info">
+                    <h2>Jacket</h2>
+                    <p>
+                        Jaket Wangi, Penampilan Semakin Ngen
+                    </p>
+                    <h3>Rp 13.000/kg</h3>
+                    <div class="menu_icon">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>    
+                </div>
+            </div> 
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image2/baby.jpg">
+                </div>
+                <div class="menu_info">
+                    <h2>Baby Clothes</h2>
+                    <p>
+                        Jos
+                    </p>
+                    <h3>Rp 12.000/kg</h3>
+                    <div class="menu_icon">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>  
+                </div>
+            </div> 
+        </div>
+    </div>
+</body>
+</html>

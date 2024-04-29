@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ar Swing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <section id="Home">
+        <nav>
+            <div class="logo">
+                <img src="image2/logo.png">
+            </div>
+            <input type="checkbox" id="check">
+            <label for="check" class="icons">
+                <i class='bx bx-menu' id="menu-icon"></i>
+                <i class='bx bx-x' id="close-icon"></i>
+            </label>
+            <ul class="navigation">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="price.html">Price</a></li>
+                <li><a href="team.html">Newest</a></li>
+                <li><a href="loc.html">Loc</a></li>
+                <button class="btnLogin-popup" onclick="window.location.href='pesan.html'">PESAN</button>
+            </ul>
+        </nav>
+        <br><br><br>
+        <div class="container" id="Loc">
+            <h1>Where You Can <span>Find Us!</span></h1>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15954.389269850524!2d124.97367463092593!3d1.4175242283911365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32870a95df6309dd%3A0x21d86e4847556add!2sUniversitas%20Klabat!5e0!3m2!1sen!2sid!4v1711332989896!5m2!1sen!2sid" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </footer>
+    <script>
+        // JavaScript functions for slider control
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(index) {
+            if (index < 0) {
+                currentIndex = slides.length - 1;
+            } else if (index >= slides.length) {
+                currentIndex = 0;
+            } else {
+                currentIndex = index;
+            }
+
+            const translateValue = -currentIndex * 100 + '%';
+            document.querySelector('.slider').style.transform = 'translateX(' + translateValue + ')';
+        }
+
+        function prevSlide() {
+            showSlide(currentIndex - 1);
+        }
+
+        function nextSlide() {
+            showSlide(currentIndex + 1);
+        }
+
+        // Autoplay (optional)
+        setInterval(() => {
+            nextSlide();
+        }, 5000); // Change slide every 5 seconds
+    </script>
+</body>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 10%;
+    width: 100%;
+    padding: 1.3rem 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(50px);
+    z-index: -1;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .4), transparent);
+    transition: .5s;
+}
+
+header:hover::after {
+    left: 100%;
+}
+
+#check {
+    display: none;
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: black;
+    user-select: none;
+    animation: fadeUp 2s ease ;
+}
+
+.icons {
+    position: absolute;
+    right: 5%;
+    font-size: 2.8rem;
+    color: #000;
+    cursor: pointer;
+    display: none;
+}
+
+.navigation a {
+    position: relative;
+    font-size: 1.15em;
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 2.5rem;
+    font-weight: bold;
+}
+
+.navigation a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: black;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: transform .3s;
+}
+
+.navigation a:hover::after{
+    transform: scaleX(1);
+}
+
+.btnLogin-popup {
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid black;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: black;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+}
+
+.btnLogin-popup:hover {
+    background: #fff;
+    color: #162938;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 60px;
+}
+
+iframe {
+    width: 80%;
+    height: 450px;
+    filter: invert(100%);
+}
+
+.slider-container {
+    position: relative;
+    overflow: hidden;
+    width: 40%; /* Adjust width as needed */
+    height: 450px; /* Adjust height as needed */
+    margin: 0 auto;
+    border: 1px solid #ccc; /* Added border for visibility */
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease;
+    height: 100%; /* Ensure slider fills container height */
+}
+
+.slide {
+    flex: 0 0 100%;
+    overflow: hidden; /* Ensure images don't overflow */
+}
+
+.slide img {
+    width: 100%; /* Ensure images fit within slide */
+    height: 100%; /* Ensure images fill slide height */
+    object-fit: cover; /* Ensure images cover entire slide */
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent background */
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1; /* Ensure buttons are above slides */
+    padding: 10px; /* Add padding for clickable area */
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}    
+
+html{
+    scroll-behavior: smooth;
+}
+
+section{
+    width: 100%;
+    height: 100vh;
+}
+
+section nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    right: 0;
+    left: 0;
+    background: white;
+    box-shadow: 10 10 10px rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+section nav .logo img{
+    width: 180px;
+    cursor: pointer;
+    margin-left: -130px ;
+}
+
+section nav ul{
+    list-style: none;
+}
+
+section nav ul li{
+    display: inline-block;
+    margin: 0 15px;
+}
+
+section nav ul li a{
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    font-size: 15px;
+    transition: 0.1s;
+}
+
+section nav ul li a::after{
+    content: '';
+    width: 0;
+    height: 2px;
+    background: #fac031;
+    display: block;
+    transition: 0.2s linear;
+}
+
+section nav ul li a:hover::after{
+    width: 100%;
+}
+
+section nav ul li a:hover{
+    color: black;
+}
+
+
+section .main{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    top: 130px;
+}
+
+section .main .men_text h1{
+    font-size: 60px;
+    position: relative;
+    top: -90px;
+    left: 20px;
+}
+
+section .main .men_text h1 span{
+    margin-left: 15px;
+    color: #fac031;
+    font-family: mv boli;
+    line-height: 22px;
+    font-size: 70px;
+}
+
+section .main .main_image img{
+    width: 450px;
+    position: relative;
+    left: 70px;
+    padding: 20px;
+    padding-bottom: 40px;
+}
+
+section p{
+    width: 650px;
+    text-align: justify;
+    position: relative;
+    left: 123px;
+    bottom: 120px;
+    line-height: 22px;
+    padding-bottom: 50px;
+}
+</style>
+</html>
